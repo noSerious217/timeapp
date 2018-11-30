@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         layoutt=findViewById(R.id.linLayout)
-        // currentDateTime=findViewById(R.id.datePicked)
+       // currentDateTime=findViewById(R.id.datePicked)
         setInitialDateTime()
         setSupportActionBar(toolbar)
 
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // отображаем диалоговое окно для выбора времени
-    fun setTime(v:View) {
+     fun setTime(v:View) {
         TimePickerDialog(
             this@MainActivity, t,
             dateAndTime.get(Calendar.HOUR_OF_DAY),
