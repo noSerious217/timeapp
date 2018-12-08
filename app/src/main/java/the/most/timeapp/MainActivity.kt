@@ -8,6 +8,8 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.TimePicker
 import android.app.TimePickerDialog
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.text.format.DateUtils
 import android.text.format.DateUtils.*
 import android.text.format.Time
@@ -18,6 +20,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var layoutt: LinearLayout? = null
+    private lateinit var mCircleView: CircleView
     private var currentDateTime: TextView? = null
     private var dateAndTime = Calendar.getInstance()
     private var i:Int = 0
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         layoutt=findViewById(R.id.linLayout)
+        mCircleView = findViewById(R.id.circleView)
         // currentDateTime=findViewById(R.id.datePicked)
         setInitialDateTime()
         setSupportActionBar(toolbar)
@@ -43,7 +47,10 @@ class MainActivity : AppCompatActivity() {
             currentDateTime?.setId(i++)
             layoutt?.addView(currentDateTime)
             setTime(view)
+            mCircleView.drawSector(0F, 0F)
         }
+
+
     }
 
 

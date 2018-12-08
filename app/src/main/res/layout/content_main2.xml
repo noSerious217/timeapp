@@ -9,10 +9,17 @@
         tools:showIn="@layout/activity_main"
         tools:context=".MainActivity">
 
+    <the.most.timeapp.CircleView android:id="@+id/circleView"
+            android:layout_width="match_parent" android:layout_height="320dp"
+                                 android:layout_marginTop="8dp"
+                                 android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
+                                 android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/linLayout">
+            android:layout_width="420dp"
+            android:layout_height="match_parent" android:id="@+id/linLayout"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent">
     </LinearLayout>
     <TextView
             android:text="Прототип ввода времени"
