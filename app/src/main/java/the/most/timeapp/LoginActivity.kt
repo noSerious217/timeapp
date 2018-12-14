@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun dr(s: String?)
     {
-        textView.text = s
+        //textView.text = s
     }
 
     fun bowlingJson(player1: String): String {
