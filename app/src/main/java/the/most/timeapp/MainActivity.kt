@@ -6,16 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 
 import kotlinx.android.synthetic.main.activity_main.*
-import android.widget.TimePicker
 import android.app.TimePickerDialog
-import android.os.Build
-import android.support.annotation.RequiresApi
-import android.text.format.DateUtils
 import android.text.format.DateUtils.*
-import android.text.format.Time
 import android.widget.LinearLayout
 import android.widget.TextView
 import java.util.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import android.os.AsyncTask.execute
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,10 +36,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, getString(R.string.testStr), Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        fab.setOnClickListener { view ->
             currentDateTime = TextView(this)
             currentDateTime?.setLayoutParams(lButtonParams)
             currentDateTime?.setId(i++)
@@ -50,8 +44,8 @@ class MainActivity : AppCompatActivity() {
             mCircleView.drawSector(0F, 0F)
         }
 
-
     }
+
 
 
     // отображаем диалоговое окно для выбора времени
