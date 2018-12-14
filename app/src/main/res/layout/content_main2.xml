@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,17 +10,24 @@
         tools:context=".MainActivity">
 
     <the.most.timeapp.CircleView android:id="@+id/circleView"
-            android:layout_width="match_parent" android:layout_height="320dp"
-                                 android:layout_marginTop="8dp"
-                                 android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
-                                 android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="420dp"
-            android:layout_height="match_parent" android:id="@+id/linLayout"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent">
-    </LinearLayout>
+                                 android:layout_width="wrap_content" android:layout_height="350dp"
+                                 android:layout_centerInParent="true"
+
+    />
+
+    <ProgressBar
+
+            android:id="@+id/circularProgressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="false"
+            android:max="8000"
+            android:progress="0"
+            android:progressDrawable="@drawable/circular"
+            android:secondaryProgress="8000"
+            android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+
     <TextView
             android:text="Прототип ввода времени"
             android:layout_width="wrap_content"
@@ -29,4 +36,17 @@
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/textView2" android:layout_alignParentEnd="true"
+            android:layout_marginEnd="168dp" android:layout_marginRight="168dp" android:id="@+id/linLayout">
+    </LinearLayout>
+    <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="30dp"
+            android:layout_alignTop="@+id/textView2" android:id="@+id/button4" android:layout_marginRight="30dp"/>
+</RelativeLayout>
