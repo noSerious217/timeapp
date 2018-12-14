@@ -6,33 +6,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".LoginActivity">
-<RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
-    <Button
-            android:text="@string/login"
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button" app:layout_constraintStart_toStartOf="parent"
-            android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="@string/name"
-            android:ems="10"
-            android:id="@+id/editText" android:layout_above="@+id/button"
-    />
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" tools:srcCompat="@tools:sample/avatars[0]"
-            android:layout_centerHorizontal="true" android:id="@+id/imageView"
-            android:visibility="invisible" android:layout_centerInParent="true"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="152dp" android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp" android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true" android:id="@+id/textView" android:layout_marginBottom="353dp"
-            android:layout_marginLeft="0dp"/>
+            android:layout_height="match_parent">
+        <Button
+                android:text="@string/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_above="@+id/imageView"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/name"
+                android:ems="10"
+                android:id="@+id/editText" android:layout_above="@+id/button"
+        />
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" tools:srcCompat="@tools:sample/avatars[0]"
+                android:layout_centerHorizontal="true" android:id="@+id/imageView"
+                android:visibility="invisible" android:layout_centerInParent="true"/>
+        <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_alignParentStart="true"
+                android:layout_marginStart="144dp" android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true" android:id="@+id/button2" android:layout_marginBottom="122dp"
+                android:layout_marginLeft="144dp"/>
 
-</RelativeLayout>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

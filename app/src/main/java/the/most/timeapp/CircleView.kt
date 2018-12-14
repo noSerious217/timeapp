@@ -14,6 +14,8 @@ import android.graphics.Color.rgb
 import android.graphics.RectF
 import android.os.Build
 import android.support.annotation.RequiresApi
+import android.widget.ProgressBar
+import kotlinx.android.synthetic.main.sample_circle_view.view.*
 import kotlin.random.Random
 import kotlin.random.Random.Default.nextFloat
 import kotlin.random.Random.Default.nextInt
@@ -177,6 +179,8 @@ class CircleView : View {
         center_x = (contentWidth/2).toFloat()
         center_y = (contentHeight/2).toFloat()
         radius = (contentHeight/2).toFloat()
+
+
 
         canvas.drawCircle(
             center_x,

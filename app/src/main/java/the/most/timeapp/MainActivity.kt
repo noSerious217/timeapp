@@ -6,17 +6,27 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 
 import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TimePicker
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.os.Build
+import android.support.annotation.RequiresApi
+import android.text.format.DateUtils
 import android.text.format.DateUtils.*
+import android.text.format.Time
 import android.widget.LinearLayout
 import android.widget.TextView
+import kotlinx.android.synthetic.main.content_main2.*
 import java.util.*
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import android.os.AsyncTask.execute
 
 
 class MainActivity : AppCompatActivity() {
+
     private var layoutt: LinearLayout? = null
     private lateinit var mCircleView: CircleView
     private var currentDateTime: TextView? = null
@@ -25,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private var lButtonParams = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
     )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +47,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
+            Snackbar.make(view, getString(R.string.testStr), Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+        fab.setOnClickListener { view ->
             currentDateTime = TextView(this)
             currentDateTime?.setLayoutParams(lButtonParams)
             currentDateTime?.setId(i++)
@@ -43,9 +58,10 @@ class MainActivity : AppCompatActivity() {
             setTime(view)
             mCircleView.drawSector(0F, 0F)
         }
-
-    }
-
+        button4.setOnClickListener {
+            circularProgressbar.incrementProgressBy(100)
+        }
+}
 
 
     // отображаем диалоговое окно для выбора времени
@@ -73,5 +89,4 @@ class MainActivity : AppCompatActivity() {
         dateAndTime.set(Calendar.MINUTE, minute)
         setInitialDateTime()
     }
-
 }
