@@ -15,5 +15,9 @@ class LoginActivity : AppCompatActivity() {
             val mainIntent = Intent(this, MainActivity::class.java)
             startActivity(mainIntent)
         }
+        button2.setOnClickListener {
+            val mainIntent1 = Intent(this, StepCounterActivity::class.java)
+            startActivity(mainIntent1)
+        }
     }
 }

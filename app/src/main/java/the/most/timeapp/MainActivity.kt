@@ -8,6 +8,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.TimePicker
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.text.format.DateUtils
@@ -15,6 +16,7 @@ import android.text.format.DateUtils.*
 import android.text.format.Time
 import android.widget.LinearLayout
 import android.widget.TextView
+import kotlinx.android.synthetic.main.content_main2.*
 import java.util.*
 
 
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private var lButtonParams = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
     )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             setTime(view)
             mCircleView.drawSector(0F, 0F)
         }
-
 
     }
 
