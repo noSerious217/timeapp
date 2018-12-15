@@ -35,7 +35,7 @@ class CircleView : View {
         }
     }
 
-    private var _circleColor: Int = Color.RED
+    private var _circleColor: Int = Color.CYAN
     private var center_x = 0F
     private var center_y = 0F
     private var radius = 0F
@@ -43,39 +43,6 @@ class CircleView : View {
     private lateinit var _circlePaint: Paint
     private lateinit var _sectors: ArrayList<Sector>
 
-    /**
-     * The text to draw
-     */
-//    var circleColor: String?
-//        get() = _exampleString
-//        set(value) {
-//            _exampleString = value
-//            invalidateTextPaintAndMeasurements()
-//        }
-//
-//    /**
-//     * The font color
-//     */
-//    var exampleColor: Int
-//        get() = _exampleColor
-//        set(value) {
-//            _exampleColor = value
-//            invalidateTextPaintAndMeasurements()
-//        }
-//
-//    /**
-//     * In the example view, this dimension is the font size.
-//     */
-//    var exampleDimension: Float
-//        get() = _exampleDimension
-//        set(value) {
-//            _exampleDimension = value
-//            invalidateTextPaintAndMeasurements()
-//        }
-
-    /**
-     * In the example view, this drawable is drawn above the text.
-     */
     var exampleDrawable: Drawable? = null
 
     constructor(context: Context) : super(context) {
@@ -110,69 +77,13 @@ class CircleView : View {
     private fun init(attrs: AttributeSet?) {
         _sectors = arrayListOf()
         _circlePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        _circlePaint.style = Paint.Style.STROKE
         _circlePaint.color = _circleColor
 
-        // Load attributes
-//        val a = context.obtainStyledAttributes(
-//            attrs, R.styleable.CircleView, defStyle, 0
-//        )
-
-//        _exampleString = a.get(
-//            R.styleable.CircleView_exampleString
-//        )
-//        _exampleColor = a.getColor(
-//            R.styleable.CircleView_exampleColor,
-//            exampleColor
-//        )
-//        // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
-//        // values that should fall on pixel boundaries.
-//        _exampleDimension = a.getDimension(
-//            R.styleable.CircleView_exampleDimension,
-//            exampleDimension
-//        )
-
-//        if (a.hasValue(R.styleable.CircleView_exampleDrawable)) {
-//            exampleDrawable = a.getDrawable(
-//                R.styleable.CircleView_exampleDrawable
-//            )
-//            exampleDrawable?.callback = this
-//        }
-//
-//        a.recycle()
-
-        // Set up a default TextPaint object
-//        textPaint = TextPaint().apply {
-//            flags = Paint.ANTI_ALIAS_FLAG
-//            textAlign = Paint.Align.LEFT
-//        }
-//
-//        // Update TextPaint and text measurements from attributes
-//        invalidateTextPaintAndMeasurements()
     }
-//
-//    private fun invalidateTextPaintAndMeasurements() {
-//        _circlePaint?.let {
-//            it. = exampleDimension
-//            it.color = exampleColor
-//            textWidth = it.measureText(exampleString)
-//            textHeight = it.fontMetrics.bottom
-//        }
-//    }
-
-//    private fun invalidatePaintAndMeasurements() {
-//        textPaint?.let {
-//            it = exampleDimension
-//            it.color = exampleColor
-//            textWidth = it.measureText(exampleString)
-//            textHeight = it.fontMetrics.bottom
-//        }
-//    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        canvas.drawColor(Color.CYAN)
         val contentWidth = width - paddingLeft - paddingRight
         val contentHeight = height - paddingTop - paddingBottom
 

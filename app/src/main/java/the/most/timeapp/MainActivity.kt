@@ -6,23 +6,16 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 
 import kotlinx.android.synthetic.main.activity_main.*
-import android.widget.TimePicker
 import android.app.TimePickerDialog
-import android.content.Context
-import android.content.Intent
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
-import android.os.Build
-import android.support.annotation.RequiresApi
-import android.text.format.DateUtils
 import android.text.format.DateUtils.*
-import android.text.format.Time
 import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.content_main2.*
 import java.util.*
+import android.view.ViewGroup
+import android.app.AlertDialog
+import android.content.DialogInterface
+import the.most.timeapp.R.layout.sample_add_event_form_view
 
 
 class MainActivity : AppCompatActivity() {
@@ -55,13 +48,30 @@ class MainActivity : AppCompatActivity() {
             currentDateTime?.setLayoutParams(lButtonParams)
             currentDateTime?.setId(i++)
             layoutt?.addView(currentDateTime)
-            setTime(view)
+            showEventDialog(view)
             mCircleView.drawSector(0F, 0F)
         }
         button4.setOnClickListener {
             circularProgressbar.incrementProgressBy(100)
         }
 }
+
+
+    private fun showEventDialog(view:View): AlertDialog? {
+        val inflater = layoutInflater
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setView(inflater.inflate(sample_add_event_form_view, null))
+    // Add action buttons
+           .setPositiveButton(
+               "Ok",
+               { dialogInterface: DialogInterface, i: Int ->
+                   setTime(view)
+               }
+           )
+        return builder.create()
+    }
 
 
     // отображаем диалоговое окно для выбора времени
