@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun testConnection(){
         val request = Request.Builder()
-            .url("http://192.168.0.102:53884/api/test")
+            .url("http://127.0.0.1:53884/api/test")
             .build()
 
         client.newCall(request).enqueue(object : Callback {

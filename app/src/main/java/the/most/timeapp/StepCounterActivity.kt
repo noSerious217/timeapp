@@ -25,7 +25,7 @@ class StepCounterActivity : AppCompatActivity(), SensorEventListener {
         setContentView(R.layout.activity_step_counter)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         button3.setOnClickListener {
-            circularProgressbar.incrementProgressBy(100)
+            circularProgressba1111.incrementProgressBy(100)
         }
     }
 
@@ -53,6 +53,6 @@ class StepCounterActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onSensorChanged(p0: SensorEvent) {
         if (running)
-            circularProgressbar.progress= p0.values[0].toInt()
+            circularProgressba1111.progress= p0.values[0].toInt()
     }
 }

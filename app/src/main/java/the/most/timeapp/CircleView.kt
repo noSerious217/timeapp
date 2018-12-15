@@ -35,7 +35,7 @@ class CircleView : View {
         }
     }
 
-    private var _circleColor: Int = Color.CYAN
+    private var _circleColor: Int = Color.WHITE
     private var center_x = 0F
     private var center_y = 0F
     private var radius = 0F
