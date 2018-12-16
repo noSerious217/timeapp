@@ -57,14 +57,14 @@ class CircleView : View {
         init(attrs)
     }
 
-    fun drawSector(startPos: Float, endPos: Float){
+    fun drawSector(startH: Float, startM: Float, endH: Float, endM: Float){
         var paint = Paint(Paint.ANTI_ALIAS_FLAG)
         val blue = java.lang.Integer.toHexString(nextInt(0, 255))
         val red = java.lang.Integer.toHexString(nextInt(0, 255))
         val green = java.lang.Integer.toHexString(nextInt(0, 255))
         paint.color = Color.parseColor("#" + red + blue + green)
-        val start = nextInt(0, 360).toFloat()
-        val end = nextInt(0, 360).toFloat()
+        val start = TimeToAngleConverter(startH, startM)
+        val end = TimeToAngleConverter(endH, endM)
         if(start >= end)
             _sectors.add(Sector(start, end, paint))
         else
@@ -116,5 +116,15 @@ class CircleView : View {
             )
         }
 
+    }
+}
+
+private val oneHour: Float = 30F
+private val oneMinute: Float = 0.5F
+
+fun TimeToAngleConverter(hour:Float, minute:Float): Float {
+    return when {
+        hour < 12F -> hour * oneHour + minute * oneMinute
+        else -> (hour-12F) * oneHour + minute * oneMinute
     }
 }

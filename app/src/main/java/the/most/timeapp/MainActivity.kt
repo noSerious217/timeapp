@@ -1,7 +1,6 @@
 package the.most.timeapp
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 
@@ -12,8 +11,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.content_main2.*
 import java.util.*
-import android.view.ViewGroup
 import android.app.AlertDialog
+import android.app.Dialog
+import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.Context
 import android.content.DialogInterface
 import android.hardware.Sensor
@@ -21,8 +21,13 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Handler
+import android.widget.EditText
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_login.view.*
+import kotlinx.android.synthetic.main.sample_add_event_form_view.*
+import kotlinx.android.synthetic.main.sample_add_event_form_view.view.*
 import the.most.timeapp.R.layout.sample_add_event_form_view
+import java.time.LocalTime
 
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
@@ -38,6 +43,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var lButtonParams = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
     )
+    private lateinit var currentText: EditText
+    var startTime: String = ""
+    var endTime: String = ""
+    var currentTime: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,16 +55,19 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         layoutt=findViewById(R.id.linLayout)
         mCircleView = findViewById(R.id.circleView)
         // currentDateTime=findViewById(R.id.datePicked)
-        setInitialDateTime()
+
+        //setInitialDateTime()
+
         setSupportActionBar(toolbar)
+
+        showEventAlertDialog()
 
         fab.setOnClickListener { view ->
             currentDateTime = TextView(this)
             currentDateTime?.setLayoutParams(lButtonParams)
             currentDateTime?.setId(i++)
             layoutt?.addView(currentDateTime)
-            showEventDialog(view)
-            mCircleView.drawSector(0F, 0F)
+            showEventAlertDialog()
         }
         button4.setOnClickListener {
             circularProgressbar.incrementProgressBy(100)
@@ -63,45 +75,85 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
 
+    //.setPositiveButton(R.string.signin, new DialogInterface.OnClickListener()
 
-    private fun showEventDialog(view:View): AlertDialog? {
-        val inflater = layoutInflater
+    private fun showEventDialog() {
+        val dialog = Dialog(this@MainActivity)
+        dialog.setContentView(sample_add_event_form_view)
 
-        val builder = AlertDialog.Builder(this)
+        dialog.buttonAddBegin.setOnClickListener {
+            setTime(it)
+        }
+        dialog.buttonAddEnd.setOnClickListener {
+            setTime(it)
+        }
+        dialog.buttonApplyEvent.setOnClickListener {
+            dialog.cancel()
+        }
 
-        builder.setView(inflater.inflate(sample_add_event_form_view, null))
-    // Add action buttons
-           .setPositiveButton(
-               "Ok",
-               { dialogInterface: DialogInterface, i: Int ->
-                   setTime(view)
-               }
-           )
-        return builder.create()
+        dialog.setCancelable(false)
+        dialog.setTitle("Add event")
+        dialog.show()
+    }
+
+    private fun showEventAlertDialog() {
+        val dialog = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(sample_add_event_form_view, null)
+
+        dialog.setView(dialogView)
+            .setPositiveButton("ADD EVENT") { DialogInterface, i ->
+                drawTimes()
+            }
+
+        dialogView.buttonAddBegin.setOnClickListener{
+            currentText = dialogView.editTextBegin
+            currentTime = startTime
+            setTime(it)
+        }
+        dialogView.buttonAddEnd.setOnClickListener{
+            currentText = dialogView.editTextEnd
+            currentTime = endTime
+            setTime(it)
+        }
+
+        dialog.show()
+    }
+
+    private fun validateTimes(){
+
+    }
+
+    private fun drawTimes(){
+        var nums = startTime.split(":")
+        val startH = nums.first().toInt().toFloat()
+        val startM = nums.last().toInt().toFloat()
+//        nums = endTime.split(":")
+//        val endH = nums[0].toFloat()
+//        val endM = nums[1].toFloat()
+//        mCircleView.drawSector(startH, startM, endH, endM)
     }
 
 
     // отображаем диалоговое окно для выбора времени
-    fun setTime(v:View) {
+    private fun setTime(v:View) {
         TimePickerDialog(
-            this@MainActivity, t,
+            this@MainActivity, timeLis,
             dateAndTime.get(Calendar.HOUR_OF_DAY),
             dateAndTime.get(Calendar.MINUTE), true
-        )
-            .show()
+        ).show()
     }
     // установка начальных даты и времени
     private fun setInitialDateTime() {
-
-        currentDateTime?.text = formatDateTime(
+        currentTime = formatDateTime(
             this,
             dateAndTime.timeInMillis,
             FORMAT_SHOW_TIME
         )
+        currentText?.setText(currentTime)
     }
 
     // установка обработчика выбора времени
-    var t: TimePickerDialog.OnTimeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+    var timeLis: OnTimeSetListener = OnTimeSetListener { view, hourOfDay, minute ->
         dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
         dateAndTime.set(Calendar.MINUTE, minute)
         setInitialDateTime()

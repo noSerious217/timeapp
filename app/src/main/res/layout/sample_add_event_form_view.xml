@@ -8,44 +8,34 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <LinearLayout
-                android:orientation="horizontal"
+        <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <EditText
-                    android:layout_width="302dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="time"
-                    android:ems="10"
-                    android:id="@+id/editText2"/>
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/buttonAddBegin"/>
-        </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:ems="10"
+                android:id="@+id/editTextBegin"/>
+        <Button
+                android:text="StartTimeButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <EditText
-                    android:layout_width="302dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="time"
-                    android:ems="10"
-                    android:id="@+id/editText3"/>
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/buttonAddEnd"/>
-        </LinearLayout>
+                android:layout_height="wrap_content" android:id="@+id/buttonAddBegin"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:ems="10"
+                android:id="@+id/editTextEnd"/>
+        <Button
+                android:text="EndTimeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/buttonAddEnd"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Event Name"
                 android:ems="10"
-                android:id="@+id/editText4" android:inputType="text"/>
+                android:id="@+id/editTextEventName" android:inputType="text"/>
         <Button
-                android:text="Button"
+                android:text="AddEvent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/buttonApplyEvent"/>
     </LinearLayout>
