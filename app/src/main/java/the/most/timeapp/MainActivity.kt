@@ -27,6 +27,8 @@ import kotlinx.android.synthetic.main.activity_login.view.*
 import kotlinx.android.synthetic.main.sample_add_event_form_view.*
 import kotlinx.android.synthetic.main.sample_add_event_form_view.view.*
 import the.most.timeapp.R.layout.sample_add_event_form_view
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 
 
@@ -142,6 +144,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             dateAndTime.get(Calendar.MINUTE), true
         ).show()
     }
+
     // установка начальных даты и времени
     private fun setInitialDateTime() {
         currentTime = formatDateTime(
@@ -150,6 +153,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             FORMAT_SHOW_TIME
         )
         currentText?.setText(currentTime)
+        val times = currentTime.split(":"," ")
+        var hour = times[0].toFloat()
+        if (times[2].equals("PM")) hour+=12
+        var minute = times[1].toFloat()
+        currentText?.setText(hour.toString()+" "+minute.toString())
     }
 
     // установка обработчика выбора времени
