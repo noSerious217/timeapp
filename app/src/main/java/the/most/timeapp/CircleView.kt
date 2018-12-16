@@ -63,12 +63,9 @@ class CircleView : View {
         val red = java.lang.Integer.toHexString(nextInt(0, 255))
         val green = java.lang.Integer.toHexString(nextInt(0, 255))
         paint.color = Color.parseColor("#" + red + blue + green)
-        val start = TimeToAngleConverter(startH, startM)
-        val end = TimeToAngleConverter(endH, endM)
-        if(start >= end)
-            _sectors.add(Sector(start, end, paint))
-        else
-            _sectors.add(Sector(end, start, paint))
+        val start = TimeStartToPointConverter(startH, startM)
+        val eventduration = TimeDurationConverter(endH-startH, endM-startM)
+        _sectors.add(Sector(start, eventduration, paint))
         //canvas.drawArc(oval, startPos, endPos, true, paint)
 
         postInvalidate()
@@ -122,9 +119,16 @@ class CircleView : View {
 private val oneHour: Float = 30F
 private val oneMinute: Float = 0.5F
 
-fun TimeToAngleConverter(hour:Float, minute:Float): Float {
-    return when {
-        hour < 12F -> hour * oneHour + minute * oneMinute
-        else -> (hour-12F) * oneHour + minute * oneMinute
-    }
+fun TimeStartToPointConverter(hour:Float, minute:Float): Float {
+    if (hour < 12F) return convertAngle(hour * oneHour + minute * oneMinute)
+    else return convertAngle((hour-12F) * oneHour + minute * oneMinute)
+}
+
+fun TimeDurationConverter(hour:Float, minute:Float): Float {
+    return hour * oneHour + minute * oneMinute
+}
+
+private fun convertAngle(angle:Float): Float{
+    if(angle<90) return (270F + angle)
+    else return (angle - 90F)
 }

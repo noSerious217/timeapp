@@ -21,6 +21,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Handler
+import android.text.Editable
 import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.view.*
@@ -34,6 +35,10 @@ import java.time.LocalTime
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
+    private class thisTime{
+        var H: Float = 0F
+        var M: Float = 0F
+    }
     private var running = false
     var sensorManager:SensorManager? = null
     var handler: Handler = Handler()
@@ -46,9 +51,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
     )
     private lateinit var currentText: EditText
-    var startTime: String = ""
-    var endTime: String = ""
-    var currentTime: String = ""
+
+    private var currentTime: thisTime = thisTime()
+    private var startTime: thisTime = thisTime()
+    private var endTime: thisTime = thisTime()
+
+//    var startH: Float = 0F
+//    var startM: Float = 0F
+//    var endH: Float = 0F
+//    var endM: Float = 0F
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +73,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         setSupportActionBar(toolbar)
 
-        showEventAlertDialog()
+       // showEventAlertDialog()
 
         fab.setOnClickListener { view ->
             currentDateTime = TextView(this)
@@ -78,25 +89,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     //.setPositiveButton(R.string.signin, new DialogInterface.OnClickListener()
-
-    private fun showEventDialog() {
-        val dialog = Dialog(this@MainActivity)
-        dialog.setContentView(sample_add_event_form_view)
-
-        dialog.buttonAddBegin.setOnClickListener {
-            setTime(it)
-        }
-        dialog.buttonAddEnd.setOnClickListener {
-            setTime(it)
-        }
-        dialog.buttonApplyEvent.setOnClickListener {
-            dialog.cancel()
-        }
-
-        dialog.setCancelable(false)
-        dialog.setTitle("Add event")
-        dialog.show()
-    }
 
     private fun showEventAlertDialog() {
         val dialog = AlertDialog.Builder(this)
@@ -125,14 +117,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     }
 
-    private fun drawTimes(){
-        var nums = startTime.split(":")
-        val startH = nums.first().toInt().toFloat()
-        val startM = nums.last().toInt().toFloat()
-//        nums = endTime.split(":")
-//        val endH = nums[0].toFloat()
-//        val endM = nums[1].toFloat()
-//        mCircleView.drawSector(startH, startM, endH, endM)
+    private fun drawTimes() {
+        textView2.text = startTime.H.toString() + "^" + startTime.M.toString() + "$" + endTime.H.toString() + "^" + endTime.M.toString()
+//        var times = startTime.split(":", " ")
+//        startH = times[0].toFloat()
+//        // if (times[2]?.equals("PM")) currentH += 12
+//        startM = times[1].toFloat()
+//        times = endTime.split(":", " ")
+//        endH = times[0].toFloat()
+//        // if (times[2]?.equals("PM")) currentH += 12
+//        endM = times[1].toFloat()
+//        textView2.text = startH.toString() + " " + startM.toString() + " " + endH.toString() + " " + endM.toString()
+        mCircleView.drawSector(startTime.H, startTime.M, endTime.H, endTime.M)
     }
 
 
@@ -147,17 +143,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     // установка начальных даты и времени
     private fun setInitialDateTime() {
-        currentTime = formatDateTime(
+        val current = formatDateTime(
             this,
             dateAndTime.timeInMillis,
             FORMAT_SHOW_TIME
         )
-        currentText?.setText(currentTime)
-        val times = currentTime.split(":"," ")
-        var hour = times[0].toFloat()
-        if (times[2].equals("PM")) hour+=12
-        var minute = times[1].toFloat()
-        currentText?.setText(hour.toString()+" "+minute.toString())
+        currentText?.setText(current)
+        val times = current.split(":", " ")
+        currentTime.H = times[0].toFloat()
+       // if (times[2]?.equals("PM")) currentH += 12
+        currentTime.M = times[1].toFloat()
+       // currentText?.setText(currentH.toString() + " " + currentM.toString())
     }
 
     // установка обработчика выбора времени
