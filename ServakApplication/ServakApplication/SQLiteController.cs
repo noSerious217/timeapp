@@ -27,7 +27,7 @@ namespace ServakApplication
                 m_dbConn.Open();
                 m_sqlCmd.Connection = m_dbConn;
 
-                m_sqlCmd.CommandText = "create table if not exists timeevent(id integer primary key autoincrement, begin text, end text, eventname text, colot text)";
+                m_sqlCmd.CommandText = "create table if not exists timeevent(id integer primary key autoincrement, begin text, end text, eventname text, color text)";
                 m_sqlCmd.ExecuteNonQuery();
             } 
             catch (Exception e)

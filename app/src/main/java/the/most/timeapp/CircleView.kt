@@ -16,6 +16,7 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.sample_circle_view.view.*
+import the.most.timeapp.models.TimeEventSpan
 import kotlin.random.Random
 import kotlin.random.Random.Default.nextFloat
 import kotlin.random.Random.Default.nextInt
@@ -57,17 +58,12 @@ class CircleView : View {
         init(attrs)
     }
 
-    fun drawSector(startH: Float, startM: Float, endH: Float, endM: Float){
+    fun drawSector(startH: Float, startM: Float, endH: Float, endM: Float, color: Int){
         var paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        val blue = java.lang.Integer.toHexString(nextInt(0, 255))
-        val red = java.lang.Integer.toHexString(nextInt(0, 255))
-        val green = java.lang.Integer.toHexString(nextInt(0, 255))
-        paint.color = Color.parseColor("#" + red + blue + green)
+        paint.color = color
         val start = TimeStartToPointConverter(startH, startM)
         val eventduration = TimeDurationConverter(endH-startH, endM-startM)
         _sectors.add(Sector(start, eventduration, paint))
-        //canvas.drawArc(oval, startPos, endPos, true, paint)
-
         postInvalidate()
     }
 
@@ -116,8 +112,8 @@ class CircleView : View {
     }
 }
 
-private val oneHour: Float = 30F
-private val oneMinute: Float = 0.5F
+private const val oneHour: Float = 30F
+private const val oneMinute: Float = 0.5F
 
 fun TimeStartToPointConverter(hour:Float, minute:Float): Float {
     if (hour < 12F) return convertAngle(hour * oneHour + minute * oneMinute)

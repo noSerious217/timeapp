@@ -9,47 +9,39 @@ using ServakApplication.Models;
 namespace ServakApplication.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Test")]
-    public class TestController : Controller
+    [Route("api/TimeSpan")]
+    public class TimeEventSpanController : Controller
     {
-        // GET: api/Test
+        // GET: api/TimeSpan
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetTimeEventSpan()
         {
-            Console.WriteLine("Androin is here");
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Test/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/TimeSpan/5
+        [HttpGet("{id}", Name = "GetTimeEventSpan")]
+        public string GetTimeEventSpan(int id)
         {
             return "value";
         }
         
-        // POST: api/Test
+        // POST: api/TimeSpan
         [HttpPost]
-        public void Post([FromBody]TimeEventSpan login)
+        public void PostTimeEventSpan([FromBody]TimeEventSpan value)
         {
-            string z = "";
         }
         
-        // PUT: api/Test/5
+        // PUT: api/TimeSpan/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void PutTimeEventSpan(int id, [FromBody]string value)
         {
         }
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteTimeEventSpan(int id)
         {
-        }
-
-        public class TestClass
-        {
-            public string Valuev;
-            public int z;
         }
     }
 }
