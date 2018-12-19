@@ -82,9 +82,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             layoutt?.addView(currentDateTime)
             showEventAlertDialog()
         }
-        button4.setOnClickListener {
-            circularProgressbar.incrementProgressBy(100)
-        }
+//        button4.setOnClickListener {
+//            circularProgressbar.incrementProgressBy(100)
+//        }
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
 
@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             text += it.EventName + "|"
         }
 
-        textView2.text = TimeEventSpanListToJSON()
+        //textView2.text = TimeEventSpanListToJSON()
     }
 
 

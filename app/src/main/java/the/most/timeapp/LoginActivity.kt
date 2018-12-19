@@ -22,12 +22,12 @@ class LoginActivity : AppCompatActivity() {
             z.EventName = "Eventzz"*/
             //doPostTimeEventSpanRequest(z)
 
-            /*button.setOnClickListener {
+            button.setOnClickListener {
                 //textView.text = loginToJSON(editText.text.toString())
                 //doPostLoginRequest(editText.text.toString())
                 val mainIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainIntent)
-            }*/
+            }
         }
         catch (ex:Exception)
         {

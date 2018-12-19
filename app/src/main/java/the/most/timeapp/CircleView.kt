@@ -86,7 +86,7 @@ class CircleView : View {
         center_x = (contentWidth / 2).toFloat()
         center_y = (contentHeight / 2).toFloat()
         radius = (contentHeight / 2).toFloat()
-        radius2 = radius * 0.8F
+        radius2 = radius * 0.7F
 
 
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
