@@ -12,29 +12,32 @@
                 android:layout_height="match_parent" app:srcCompat="@drawable/pocketwatch"
                 android:layout_centerHorizontal="true" android:layout_alignParentTop="true" android:id="@+id/imageView2"
                 android:scaleType="centerCrop"/>
-    <EditText
+    <Button
+            android:text="@string/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="@string/name"
-            android:ems="10"
-            android:id="@+id/editText"
-            android:textColor="@color/colorAccent"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="179dp"/>
-        <Button
-                android:text="@string/login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:layout_below="@+id/editText"/>
+            android:id="@+id/button"
+            android:layout_below="@+id/editText1" style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
     <Button
             android:text="@string/register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button2"
             android:layout_below="@+id/button"
-            />
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_alignParentStart="true"
+             android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
+            android:layout_marginTop="93dp"
+            android:id="@+id/editText1">
+
+        <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:hint="Username"/>
+    </android.support.design.widget.TextInputLayout>
 
 
 </RelativeLayout>

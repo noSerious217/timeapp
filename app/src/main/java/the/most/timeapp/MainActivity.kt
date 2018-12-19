@@ -22,7 +22,9 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Handler
+import android.support.design.widget.TextInputEditText
 import android.text.Editable
+import android.view.Gravity
 import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.view.*
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var lButtonParams = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
     )
-    private lateinit var currentText: EditText
+    private lateinit var currentText: TextView
 
     private var currentTime: thisTime = thisTime()
     private var startTime: thisTime = thisTime()
@@ -91,19 +93,19 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private fun showEventAlertDialog() {
         val dialog = AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(sample_add_event_form_view, null)
-
+        val etEventName = findViewById<TextInputEditText>(R.id.editTextEventName)
         dialog.setView(dialogView)
             .setPositiveButton("ADD EVENT") { DialogInterface, i ->
-                drawTimes(dialogView.editTextEventName.text.toString())
+                drawTimes(etEventName.text.toString())
             }
 
         dialogView.buttonAddBegin.setOnClickListener{
-            currentText = dialogView.editTextBegin
+            currentText = dialogView.editTextBegin as TextView
             currentTime = startTime
             setTime(it)
         }
         dialogView.buttonAddEnd.setOnClickListener{
-            currentText = dialogView.editTextEnd
+            currentText = dialogView.editTextEnd as TextView
             currentTime = endTime
             setTime(it)
         }

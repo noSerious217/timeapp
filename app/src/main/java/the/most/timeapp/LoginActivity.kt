@@ -14,17 +14,7 @@ class LoginActivity : AppCompatActivity() {
         try {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_login)
-
-            /*val z = TimeEventSpan()
-            z.Color = "fdfd"
-            z.Begin = "2:30"
-            z.End = "3:40"
-            z.EventName = "Eventzz"*/
-            //doPostTimeEventSpanRequest(z)
-
             button.setOnClickListener {
-                //textView.text = loginToJSON(editText.text.toString())
-                //doPostLoginRequest(editText.text.toString())
                 val mainIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainIntent)
             }
