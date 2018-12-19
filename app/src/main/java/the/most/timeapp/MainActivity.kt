@@ -129,7 +129,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         mCircleView.drawSector(startTime.H, startTime.M, endTime.H, endTime.M, Color.parseColor(span.Color))
 
-        textView2.text = span.EventName + " " + span.Begin + " " + span.End + " " + span.Color
+        doPostTimeEventSpanRequest(span)
+
+        var text = span.EventName + " " + span.Begin + " " + span.End + " " + span.Color + '\n'
+        _spanList.forEach{
+            text += it.EventName + "|"
+        }
+
+        textView2.text = TimeEventSpanListToJSON()
     }
 
 

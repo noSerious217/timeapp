@@ -14,12 +14,4 @@ namespace ServakApplication.Models
         public string EventName { get; set; }
         public string Color { get; set; }
     }
-
-    public class TimeEventSpanTmp
-    {
-        public string Begin { get; set; }
-        public string End { get; set; }
-        public string EventName { get; set; }
-        public string Color { get; set; }
-    }
 }
