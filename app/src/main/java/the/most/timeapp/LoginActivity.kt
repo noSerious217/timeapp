@@ -15,6 +15,10 @@ class LoginActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_login)
             button.setOnClickListener {
+
+                _userName = editText.text.toString()
+                doPostLoginRequest(_userName)
+
                 val mainIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainIntent)
             }

@@ -14,23 +14,42 @@ namespace ServakApplication.Controllers
     {
         // GET: api/TimeEventSpanList
         [HttpGet]
-        public IEnumerable<string> GetTimeEventSpanList()
+        public void GetTimeEventSpanList()
         {
-            return new string[] { "value1", "value2" };
         }
 
         // GET: api/TimeEventSpanList/5
         [HttpGet("{id}", Name = "GetTimeEventSpanList")]
-        public string GetTimeEventSpanList(int id)
+        public IEnumerable<TimeEventSpanJSON> GetTimeEventSpanList(int id)
         {
-            return "value";
+            SQLiteController.Init();
+            var events = SQLiteController.SelectEvent(id);
+            IEnumerable<TimeEventSpanJSON> retEvents = events.Select(x => new TimeEventSpanJSON
+            {
+                UserId = x.UserId,
+                Color = x.Color,
+                EventName = x.EventName,
+                UserName = x.UserName,
+                Begin = SQLiteController.DateTimeToString(x.Begin),
+                End = SQLiteController.DateTimeToString(x.End)
+            });
+            return retEvents;
+        }
+
+        public class Fantik
+        {
+            public TimeEventSpan[] list;
         }
         
         // POST: api/TimeEventSpanList
         [HttpPost]
-        public void PostTimeEventSpanList([FromBody]IEnumerable<TimeEventSpan> list)
+        public void PostTimeEventSpanList([FromBody]Fantik list)
         {
-            var z = list;
+            SQLiteController.Init();
+            foreach(var lis in list.list)
+            {
+                SQLiteController.Insert(lis);
+            }
         }
         
         // PUT: api/TimeEventSpanList/5

@@ -69,6 +69,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+       // textView2.text = _userName
+
         _timeEvents = arrayListOf()
 
         setContentView(R.layout.activity_main)
@@ -93,10 +95,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private fun showEventAlertDialog() {
         val dialog = AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(sample_add_event_form_view, null)
-        val etEventName = findViewById<TextInputEditText>(R.id.editTextEventName)
+       // val etEventName = findViewById<android.support.design.widget.TextInputLayout>(R.id.editTextEventNamelayout)
         dialog.setView(dialogView)
             .setPositiveButton("ADD EVENT") { DialogInterface, i ->
-                drawTimes(etEventName.text.toString())
+                drawTimes(dialogView.editTextEventName.text.toString())
             }
 
         dialogView.buttonAddBegin.setOnClickListener{
@@ -119,11 +121,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private fun drawTimes(name: String) {
         var span = TimeEventSpan()
+        span.UserId = _userId
+        span.UserName = _userName
         span.Begin = startTime.H.roundToInt().toString() + ":" + startTime.M.roundToInt().toString()
         span.End = endTime.H.roundToInt().toString() + ":" + endTime.M.roundToInt().toString()
         span.EventName = name
 
-        //_timeEvents.add(span)
+        _timeEvents.add(span)
         val blue = java.lang.Integer.toHexString(nextInt(0, 255))
         val red = java.lang.Integer.toHexString(nextInt(0, 255))
         val green = java.lang.Integer.toHexString(nextInt(0, 255))
@@ -133,10 +137,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         doPostTimeEventSpanRequest(span)
 
-        var text = span.EventName + " " + span.Begin + " " + span.End + " " + span.Color + '\n'
-        _spanList.forEach{
-            text += it.EventName + "|"
-        }
+//        var text = span.EventName + " " + span.Begin + " " + span.End + " " + span.Color + '\n'
+//        _spanList.forEach{
+//            text += it.EventName + "|"
+//        }
 
         //textView2.text = TimeEventSpanListToJSON()
     }

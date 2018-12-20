@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServakApplication.Models;
 
 namespace ServakApplication.Controllers
 {
@@ -27,9 +28,15 @@ namespace ServakApplication.Controllers
         
         // POST: api/Login
         [HttpPost]
-        public void PostLogin([FromBody]string value)
+        public int PostLogin([FromBody]string value)
         {
-            string z = value;
+            SQLiteController.Init();
+            if (SQLiteController.CheckUser(value)) return SQLiteController.SelectUser().Where(x => x.UserName == value).FirstOrDefault().Id;
+            else
+            {
+                SQLiteController.Insert(new UserSpan { UserName = value });
+                return SQLiteController.SelectUser().Where(x => x.UserName == value).FirstOrDefault().Id;
+            }
         }
         
         // PUT: api/Login/5

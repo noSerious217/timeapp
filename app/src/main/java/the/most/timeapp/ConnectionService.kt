@@ -9,11 +9,13 @@ import java.io.IOException
 import org.json.JSONArray
 
 val _spanList: ArrayList<TimeEventSpan> = arrayListOf()
+val _spanLoadList: ArrayList<TimeEventSpan> = arrayListOf()
 
 private val client = OkHttpClient()
 private val JSON = MediaType.parse("application/json; charset=utf-8")
 
-
+var _userName: String = ""
+var _userId: Int = -1
 
 fun testConnection(){
     val request = Request.Builder()
@@ -63,6 +65,19 @@ fun doPostTimeEventSpanListRequest() {
     })
 }
 
+fun doGetTimeEventSpanListRequest() {
+    val request = Request.Builder()
+        .url("http://192.168.0.102:53884/api/TimeEventSpanList/"+ _userId.toString())
+        .build()
+
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {}
+        override fun onResponse(call: Call, response: Response) {
+
+        } //= dr(response.body()?.string())
+    })
+}
+
 @Throws(IOException::class)
 fun doPostLoginRequest(login: String) {
     val body = RequestBody.create(JSON, loginToJSON(login))
@@ -73,8 +88,25 @@ fun doPostLoginRequest(login: String) {
 
     client.newCall(request).enqueue(object : Callback {
         override fun onFailure(call: Call, e: IOException) {}
-        override fun onResponse(call: Call, response: Response) {}
+        override fun onResponse(call: Call, response: Response) {
+            _userId = response.body()!!.string().toInt()
+
+        }
     })
+}
+
+fun JSONTimeSpanParse (json:String){
+    var obj = JSONObject(json)
+    var span = TimeEventSpan()
+
+    span.Color = obj.getString("Color")
+    span.Begin = obj.getString("Begin")
+    span.End = obj.getString("End")
+    span.UserId = obj.getInt("UserId")
+    span.UserName = obj.getString("UserName")
+
+    //doPostTimeEventSpanRequest(span)
+    _spanLoadList.add(span)
 }
 
 private fun TimeEventSpanToJSON(span: TimeEventSpan): String {
@@ -84,6 +116,8 @@ private fun TimeEventSpanToJSON(span: TimeEventSpan): String {
 
 private fun TimeEventSpanObj(span: TimeEventSpan): JSONObject {
     var jsonObj = JSONObject()
+    jsonObj.put("UserId", span.UserId)
+    jsonObj.put("UserName", span.UserName)
     jsonObj.put("EventName", span.EventName)
     jsonObj.put("Begin", span.Begin)
     jsonObj.put("End", span.End)
@@ -97,6 +131,8 @@ private fun TimeEventSpanObj(span: TimeEventSpan): JSONObject {
 
     _spanList.forEach {
         var jsonObj = JSONObject()
+        jsonObj.put("UserId", it.UserId)
+        jsonObj.put("UserName", it.UserName)
         jsonObj.put("EventName", it.EventName)
         jsonObj.put("Begin", it.Begin)
         jsonObj.put("End", it.End)

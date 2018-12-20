@@ -9,8 +9,20 @@ namespace ServakApplication.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public string UserName { get; set; }
         public DateTime Begin { get; set; }
         public DateTime End { get; set; }
+        public string EventName { get; set; }
+        public string Color { get; set; }
+    }
+
+    public class TimeEventSpanJSON
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Begin { get; set; }
+        public string End { get; set; }
         public string EventName { get; set; }
         public string Color { get; set; }
     }

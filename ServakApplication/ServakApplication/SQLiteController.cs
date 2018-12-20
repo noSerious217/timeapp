@@ -74,7 +74,7 @@ namespace ServakApplication
             string[] timearr = time.Split(':');
             int hour = int.Parse(timearr[0]);
             int minute = int.Parse(timearr[1]);
-            DateTime current = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hour, minute, DateTime.Now.Second);
+            DateTime current = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hour, minute, 0);
             return current;
         }
 
@@ -86,7 +86,7 @@ namespace ServakApplication
             List<TimeEventSpan> list = new List<TimeEventSpan>();
             for (int i=0;i<dTable.Rows.Count;i++)
             {
-                list.Add(new TimeEventSpan() { Id = (int)dTable.Rows[i].ItemArray[0], UserId = (int)dTable.Rows[i].ItemArray[1], Begin = StringToDateTime((string)dTable.Rows[i].ItemArray[2]), End = StringToDateTime((string)dTable.Rows[i].ItemArray[3]), EventName=(string)dTable.Rows[i].ItemArray[4],Color=(string)dTable.Rows[i].ItemArray[5]});
+                list.Add(new TimeEventSpan() { Id = Convert.ToInt32(dTable.Rows[i].ItemArray[0]), UserId = Convert.ToInt32(dTable.Rows[i].ItemArray[1]), Begin = StringToDateTime((string)dTable.Rows[i].ItemArray[2]), End = StringToDateTime((string)dTable.Rows[i].ItemArray[3]), EventName=(string)dTable.Rows[i].ItemArray[4],Color=(string)dTable.Rows[i].ItemArray[5]});
             }
             return list;
         }
@@ -99,7 +99,7 @@ namespace ServakApplication
             List<TimeEventSpan> list = new List<TimeEventSpan>();
             for (int i = 0; i < dTable.Rows.Count; i++)
             {
-                list.Add(new TimeEventSpan() { Id = (int)dTable.Rows[i].ItemArray[0], UserId = (int)dTable.Rows[i].ItemArray[1], Begin = StringToDateTime((string)dTable.Rows[i].ItemArray[2]), End = StringToDateTime((string)dTable.Rows[i].ItemArray[3]), EventName = (string)dTable.Rows[i].ItemArray[4], Color = (string)dTable.Rows[i].ItemArray[5] });
+                list.Add(new TimeEventSpan() { Id = Convert.ToInt32(dTable.Rows[i].ItemArray[0]), UserId = Convert.ToInt32(dTable.Rows[i].ItemArray[1]), Begin = StringToDateTime((string)dTable.Rows[i].ItemArray[2]), End = StringToDateTime((string)dTable.Rows[i].ItemArray[3]), EventName = (string)dTable.Rows[i].ItemArray[4], Color = (string)dTable.Rows[i].ItemArray[5] });
             }
             return list;
         }
@@ -112,7 +112,7 @@ namespace ServakApplication
             List<UserSpan> list = new List<UserSpan>();
             for (int i = 0; i < dTable.Rows.Count; i++)
             {
-                list.Add(new UserSpan() { Id = (int)dTable.Rows[i].ItemArray[0], UserName = (string)dTable.Rows[i].ItemArray[1] });
+                list.Add(new UserSpan() { Id = Convert.ToInt32(dTable.Rows[i].ItemArray[0]), UserName = (string)dTable.Rows[i].ItemArray[1] });
             }
             return list;
         }
@@ -120,7 +120,7 @@ namespace ServakApplication
         public static bool CheckUser(string UserName)
         {
             DataTable dTable = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("select * from user where username = "+UserName, m_dbConn);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("select * from user where username = \""+UserName + "\"", m_dbConn);
             adapter.Fill(dTable);
             return dTable.Rows.Count > 0;
         }

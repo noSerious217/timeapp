@@ -28,9 +28,11 @@ namespace ServakApplication.Controllers
 
         // POST: api/TimeEventSpan
         [HttpPost]
-        public void PostTimeEventSpan([FromBody]TimeEventSpan value)
+        public string PostTimeEventSpan([FromBody]TimeEventSpan value)
         {
-            var q = value;
+            SQLiteController.Init();
+            SQLiteController.Insert(value);
+            return "jrtq";
         }
 
         // PUT: api/TimeEventSpan/5
